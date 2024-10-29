@@ -1,0 +1,248 @@
+{
+	"info": {
+		"_postman_id": "d2bc5018-cf1f-4787-8add-19ec5d70930e",
+		"name": "PHP - Parte 4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Autenticación",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"postman.setEnvironmentVariable(\"JWT\", jsonData.jwt);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"pepe@pepe.com\",\n    \"clave\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"postman.setEnvironmentVariable(\"JWT\", \"\");",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{JWT}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/logout",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contactos",
+			"item": [
+				{
+					"name": "Listado de contactos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{JWT}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/contactos",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"contactos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detalle de contacto",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{JWT}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/contactos/2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"contactos",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear contacto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{JWT}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Unnombre\",\n    \"apellido\": \"Unapellido\",\n    \"email\": \"ejemplo@ejemplo.com\",\n    \"domicilio\": \"Unacalle 1234, Unalocalidad\",\n    \"fecha_de_nacimiento\": \"1986-06-29\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/contactos",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"contactos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar contacto",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{JWT}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Otronombre\",\n    \"apellido\": \"Otroapellido\",\n    \"email\": \"ejemplo@ejemplo.com\",\n    \"domicilio\": \"Unacalle 3210, Unalocalidad\",\n    \"fecha_de_nacimiento\": \"1986-06-29\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/contactos/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"contactos",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar contacto",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{JWT}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/contactos/1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"contactos",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
